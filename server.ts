@@ -7,7 +7,7 @@ dotenv.config();
 
 const GEMINI_API_KEY_ENV = process.env.GEMINI_API_KEY || "";
 const GEMINI_BASE_URL = "https://generativelanguage.googleapis.com/v1beta/models";
-const DEFAULT_GEMINI_MODEL = "gemini-3.1-flash-lite-preview";
+const DEFAULT_GEMINI_MODEL = "gemini-2.5-flash";
 
 // リクエストからAPIキーを取得（ヘッダー優先、フォールバックで.env）
 function getApiKey(req: express.Request): string {
@@ -16,11 +16,11 @@ function getApiKey(req: express.Request): string {
 
 // Available Gemini models to expose in the UI
 const GEMINI_MODELS = [
+  "gemini-2.5-flash",
+  "gemini-2.5-flash-lite",
+  "gemini-2.5-pro",
   "gemini-3.1-flash-lite-preview",
   "gemini-3.1-pro-preview",
-  "gemini-2.5-flash",
-  "gemini-2.5-pro",
-  "gemini-2.0-flash-001",
 ];
 
 // Convert OpenAI-style messages to Gemini contents format

@@ -24,7 +24,7 @@ export default function ApiKeyModal({ isOpen, onSave, isUpdate = false }: ApiKey
     try {
       // 簡易バリデーション：Gemini APIに軽いリクエストを投げて確認
       const res = await fetch(
-        `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-001:generateContent?key=${trimmed}`,
+        `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${trimmed}`,
         {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
