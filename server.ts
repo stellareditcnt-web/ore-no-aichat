@@ -401,8 +401,14 @@ async function startServer() {
         if (dataStr === "[DONE]") return;
         try {
           const parsed = JSON.parse(dataStr);
-          const chunk = parsed.candidates?.[0]?.content?.parts?.[0]?.text;
-          if (typeof chunk === "string" && chunk) {
+          const parts: Array<{ text?: string; thought?: boolean }> =
+            parsed.candidates?.[0]?.content?.parts ?? [];
+          // thinking parts（thought: true）はスキップして本文のみ結合
+          const chunk = parts
+            .filter((p) => !p.thought && typeof p.text === "string")
+            .map((p) => p.text)
+            .join("");
+          if (chunk) {
             fullText += chunk;
             res.write(`data: ${JSON.stringify({ text: chunk })}\n\n`);
           }
